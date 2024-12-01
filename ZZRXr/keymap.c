@@ -8,8 +8,6 @@ enum custom_keycodes {
   ST_MACRO_0,
 };
 
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_W,           KC_E,           KC_T,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_U,           KC_I,           KC_O,           KC_TRANSPARENT, LCTL(LSFT(KC_TAB)),
@@ -128,6 +126,14 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    /* Disable all combos if on gaming-related layers */
+    if (layer_state_is(5) || layer_state_is(6) || layer_state_is(7)) {
+        return false;
+    }
+
+    return true;
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
