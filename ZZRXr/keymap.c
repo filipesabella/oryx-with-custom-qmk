@@ -115,7 +115,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo21, KC_Q),
 };
 
-#define COMBO_SHOULD_TRIGGER
+#define COMBO_SHOULD_TRIGGER true
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_LEFT_CTRL:
