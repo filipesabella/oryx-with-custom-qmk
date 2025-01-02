@@ -126,15 +126,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    /* Disable all combos if on gaming-related layers */
-    if (layer_state_is(5) || layer_state_is(6) || layer_state_is(7)) {
-        return false;
-    }
-
-    return true;
-}
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case ST_MACRO_0:
@@ -152,5 +143,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    /* Disable all combos if on gaming-related layers */
+    if (layer_state_is(5) || layer_state_is(6) || layer_state_is(7)) {
+        return false;
+    }
 
+    return true;
+}
 
