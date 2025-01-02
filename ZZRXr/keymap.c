@@ -8,6 +8,7 @@ enum custom_keycodes {
   ST_MACRO_0,
 };
 
+<<<<<<< HEAD
 enum tap_dance_codes {
   DANCE_0,
 };
@@ -18,6 +19,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_A,           KC_S,           KC_D,           KC_F,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_N,           KC_K,           KC_L,           KC_P,           LCTL(KC_TAB),
     KC_TRANSPARENT, KC_Z,           KC_X,           KC_C,           KC_V,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_M,           KC_R,           KC_Y,           KC_B,           LALT(KC_TAB),
     KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_GUI,    KC_LEFT_ALT,    KC_LEFT_CTRL,   KC_TRANSPARENT,                                 KC_TRANSPARENT, MO(1),          MO(2),          OSL(3),         TT(4),          TG(5),
+=======
+
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [0] = LAYOUT_voyager(
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_W,           KC_E,           KC_T,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_U,           KC_I,           KC_O,           MO(8),          LCTL(LSFT(KC_TAB)),
+    KC_TRANSPARENT, KC_A,           KC_S,           KC_D,           KC_F,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_N,           KC_K,           KC_L,           KC_P,           LCTL(KC_TAB),
+    KC_TRANSPARENT, KC_Z,           KC_X,           KC_C,           KC_V,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_M,           KC_R,           KC_Y,           KC_B,           LALT(KC_TAB),
+    KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_GUI,    KC_LEFT_ALT,    KC_LEFT_CTRL,   KC_TRANSPARENT,                                 KC_TRANSPARENT, MO(1),          MO(2),          OSL(3),         TT(4),          TG(5),
+>>>>>>> origin/oryx
                                                     KC_SPACE,       KC_ENTER,                                       KC_ESCAPE,      TO(0)
   ),
   [1] = LAYOUT_voyager(
@@ -130,6 +141,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_LEFT_CTRL:
             return TAPPING_TERM -100;
+        case MO(8):
+            return TAPPING_TERM -100;
         case MO(2):
             return TAPPING_TERM -100;
         default:
@@ -162,58 +175,3 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 
     return true;
 }
-
-typedef struct {
-    bool is_press_action;
-    uint8_t step;
-} tap;
-
-enum {
-    SINGLE_TAP = 1,
-    SINGLE_HOLD,
-    DOUBLE_TAP,
-    DOUBLE_HOLD,
-    DOUBLE_SINGLE_TAP,
-    MORE_TAPS
-};
-
-static tap dance_state[1];
-
-uint8_t dance_step(tap_dance_state_t *state);
-
-uint8_t dance_step(tap_dance_state_t *state) {
-    if (state->count == 1) {
-        if (state->interrupted || !state->pressed) return SINGLE_TAP;
-        else return SINGLE_HOLD;
-    } else if (state->count == 2) {
-        if (state->interrupted) return DOUBLE_SINGLE_TAP;
-        else if (state->pressed) return DOUBLE_HOLD;
-        else return DOUBLE_TAP;
-    }
-    return MORE_TAPS;
-}
-
-
-void dance_0_finished(tap_dance_state_t *state, void *user_data);
-void dance_0_reset(tap_dance_state_t *state, void *user_data);
-
-void dance_0_finished(tap_dance_state_t *state, void *user_data) {
-    dance_state[0].step = dance_step(state);
-    switch (dance_state[0].step) {
-        case DOUBLE_HOLD: layer_on(8); break;
-    }
-}
-
-void dance_0_reset(tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[0].step) {
-              case DOUBLE_HOLD:
-                layer_off(8);
-                break;
-    }
-    dance_state[0].step = 0;
-}
-
-tap_dance_action_t tap_dance_actions[] = {
-        [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_0_finished, dance_0_reset),
-};
