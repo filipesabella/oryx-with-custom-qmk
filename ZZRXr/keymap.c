@@ -8,27 +8,12 @@ enum custom_keycodes {
   ST_MACRO_0,
 };
 
-<<<<<<< HEAD
-enum tap_dance_codes {
-  DANCE_0,
-};
-
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_voyager(
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_W,           KC_E,           KC_T,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_U,           KC_I,           KC_O,           TD(DANCE_0),    LCTL(LSFT(KC_TAB)),
-    KC_TRANSPARENT, KC_A,           KC_S,           KC_D,           KC_F,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_N,           KC_K,           KC_L,           KC_P,           LCTL(KC_TAB),
-    KC_TRANSPARENT, KC_Z,           KC_X,           KC_C,           KC_V,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_M,           KC_R,           KC_Y,           KC_B,           LALT(KC_TAB),
-    KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_GUI,    KC_LEFT_ALT,    KC_LEFT_CTRL,   KC_TRANSPARENT,                                 KC_TRANSPARENT, MO(1),          MO(2),          OSL(3),         TT(4),          TG(5),
-=======
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_W,           KC_E,           KC_T,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_U,           KC_I,           KC_O,           MO(8),          LCTL(LSFT(KC_TAB)),
     KC_TRANSPARENT, KC_A,           KC_S,           KC_D,           KC_F,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_N,           KC_K,           KC_L,           KC_P,           LCTL(KC_TAB),
     KC_TRANSPARENT, KC_Z,           KC_X,           KC_C,           KC_V,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_M,           KC_R,           KC_Y,           KC_B,           LALT(KC_TAB),
     KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_GUI,    KC_LEFT_ALT,    KC_LEFT_CTRL,   KC_TRANSPARENT,                                 KC_TRANSPARENT, MO(1),          MO(2),          OSL(3),         TT(4),          TG(5),
->>>>>>> origin/oryx
                                                     KC_SPACE,       KC_ENTER,                                       KC_ESCAPE,      TO(0)
   ),
   [1] = LAYOUT_voyager(
